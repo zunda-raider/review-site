@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-// ✅ 型を明示せず、柔軟に対応する（App Router対応）
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function GenrePage({ params }: { params: any }) {
   const genre = params.genre;
 
