@@ -1,12 +1,8 @@
 import { supabase } from "@/lib/supabase";
-import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
 
-type Props = {
-  params: { slug: string };
-};
-
-export default async function ReviewPage({ params }: Props) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function ReviewPage({ params }: { params: any }) {
   const { slug } = params;
 
   const { data: review, error } = await supabase
@@ -20,16 +16,10 @@ export default async function ReviewPage({ params }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold mb-2">『{review.title}』レビュー</h1>
-        <p className="text-sm text-gray-400 mb-6">ジャンル: {review.genre} / スコア: {review.score}</p>
-
-        {/* classNameはdivに適用！ */}
-        <div className="prose prose-invert max-w-none">
-          <ReactMarkdown>{review.body}</ReactMarkdown>
-        </div>
-      </div>
+    <div className="min-h-screen bg-gray-900 text-white p-6">
+      <h1 className="text-3xl font-bold mb-4">{review.title}</h1>
+      <p className="mb-4 text-gray-400">{review.description}</p>
+      <div className="prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: review.body }} />
     </div>
   );
 }
