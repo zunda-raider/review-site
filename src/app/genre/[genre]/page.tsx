@@ -3,21 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-type Props = {
+// ✅ 型を明示的に書いてビルドエラーを回避
+export default async function GenrePage({
+  params,
+}: {
   params: { genre: string };
-};
-
-export async function generateStaticParams() {
-  const { data, error } = await supabase.from("reviews").select("genre");
-
-  if (!data || error) return [];
-
-  const genres = Array.from(new Set(data.map((review) => review.genre)));
-
-  return genres.map((genre) => ({ genre }));
-}
-
-export default async function GenrePage({ params }: Props) {
+}) {
   const genre = params.genre;
 
   const { data: reviews, error } = await supabase
