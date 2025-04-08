@@ -2,15 +2,7 @@ import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import Link from "next/link";
 
-type Review = {
-  id: number;
-  title: string;
-  slug: string;
-  description: string;
-  thumbnail_url: string;
-  date: string;
-};
-
+// ✅ 不要な型定義は削除！（使っていないため）
 export default async function NewReleasesPage() {
   const oneYearAgo = new Date();
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
@@ -51,7 +43,9 @@ export default async function NewReleasesPage() {
               <div>
                 <h3 className="text-xl font-semibold mb-1">『{review.title}』</h3>
                 <p className="text-sm text-gray-700">{review.description}</p>
-                <p className="text-xs text-gray-500 mt-1">公開日: {new Date(review.date).toLocaleDateString()}</p>
+                <p className="text-xs text-gray-500 mt-1">
+                  公開日: {new Date(review.date).toLocaleDateString()}
+                </p>
               </div>
             </div>
           </Link>
